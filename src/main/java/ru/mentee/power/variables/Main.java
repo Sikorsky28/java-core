@@ -1,4 +1,4 @@
-package ru.mentee.power;
+package ru.mentee.power.variables;
 
 
 import static java.lang.System.*;
@@ -10,7 +10,7 @@ public class Main {
 
         out.println("имя : " + name);
         out.println("возраст: " + age);
-        
+
     }
 
 }
