@@ -52,8 +52,7 @@ class CreditCalculatorTest {
 
         // Assert
 
-        // Для хорошего рейтинга (650-749) ставка по потребительскому кредиту: 15% - 1% = 14%
-        double monthlyRate = 13.0 / 12 / 100; // В этой строке ошибка!
+        double monthlyRate = 14.0 / 12 / 100;
         double expectedPayment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, loanTermMonths))
                 / (Math.pow(1 + monthlyRate, loanTermMonths) - 1);
 
@@ -73,8 +72,7 @@ class CreditCalculatorTest {
         double monthlyPayment = calculator.calculateMonthlyPayment(loanAmount, loanTermMonths, creditType, creditScore);
 
         // Assert
-        // Для среднего рейтинга (500-649) базовая ставка по автокредиту не меняется (12%)
-        double monthlyRate = 10.0 / 12 / 100; // В этой строке ошибка!
+        double monthlyRate = 12.0 / 12 / 100;
         double expectedPayment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, loanTermMonths))
                 / (Math.pow(1 + monthlyRate, loanTermMonths) - 1);
 
