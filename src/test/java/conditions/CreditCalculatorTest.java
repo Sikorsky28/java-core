@@ -213,6 +213,6 @@ class CreditCalculatorTest {
 
         // Assert
         // При кредитном рейтинге больше 850 метод должен возвращать -1
-        assertThat(result).isEqualTo(-1); // В этой строке ошибка!
+        assertThat(result).isEqualTo(-1);
     }
 }
