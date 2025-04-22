@@ -35,7 +35,7 @@ public class StringOperations {
 
 
         char c = s1.charAt(2);
-        System.out.println(c);
+
 
         // Выведите результаты всех операций
 
