@@ -22,9 +22,6 @@ public class TypeCalculator {
         double d = 60.6;
 
 
-
-
-
         System.out.println("1. byte + short → " + (b + s) + " (тип: " + getType(b + s) + ")");
         System.out.println("2. int + long → " + (i + l) + " (тип: " + getType(i - l) + ")");
         System.out.println("3. float + double → " + (f + d) + " (тип: " + getType(f * d) + ")");
