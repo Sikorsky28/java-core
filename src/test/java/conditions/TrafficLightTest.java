@@ -1,5 +1,6 @@
 package conditions;
 import org.junit.jupiter.api.Test;
+import ru.mentee.power.conditions.TrafficLight;
 // Импортируем статический метод assertThat из AssertJ
 import static org.assertj.core.api.Assertions.assertThat;
 

@@ -2,6 +2,8 @@ package conditions;
 
 
 import org.junit.jupiter.api.Test;
+import ru.mentee.power.conditions.TheaterTickets;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.offset;
 

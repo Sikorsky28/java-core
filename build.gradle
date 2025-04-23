@@ -8,16 +8,7 @@ version = '1.0-SNAPSHOT'
 repositories {
     mavenCentral()
 }
-sourceSets {
-    test {
-        java {
-            srcDirs = ['src/test/java', 'custom-test-folder']
-        }
-        resources {
-            srcDirs = ['src/test/resources']
-        }
-    }
-}
+
 
 dependencies {
     // Зависимости для JUnit 5 (Jupiter)
