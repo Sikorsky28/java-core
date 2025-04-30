@@ -1,5 +1,4 @@
 package ru.mentee.power.loop;
-
 import java.util.List;
 
 public class ForEachListExample {
