@@ -14,14 +14,7 @@ public class UnitConverter {
     private static final List<String> WEIGHT_UNITS = Arrays.asList( "Килограмм", "Грамм", "Фунт", "Унция");
     private static final List<String> TEMP_UNITS = Arrays.asList( "Цельсий", "Фаренгейт", "Кельвин");
 
-    /**
-     * Конвертирует значение из одной единицы измерения в другую
-     *
-     * @param value значение для конвертации
-     * @param fromUnit исходная единица измерения
-     * @param toUnit целевая единица измерения
-     * @return конвертированное значение или ERROR_CODE в случае ошибки
-     */
+
     public double convert(double value, String fromUnit, String toUnit) {
         // 1. Проверка поддерживаемых единиц
         if (!LENGTH_UNITS.contains(fromUnit) && !WEIGHT_UNITS.contains(fromUnit) && !TEMP_UNITS.contains(fromUnit)) {
