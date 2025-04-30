@@ -71,25 +71,17 @@ public class RockPaperScissors {
         return VALID_MOVES.get(randomIndex);
     }
 
-    /**
-     * Запускает одну игровую сессию.
-     */
-    public void playOneGame() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Ваш ход (Камень, Ножницы, Бумага): ");
-        String playerMove = scanner.nextLine().trim();
-
+    public String playOneGame(String playerMove) {
         if (!validateMove(playerMove)) {
-            System.out.println(ERROR);
-            return;
+            return ERROR;
         }
 
         String computerMove = generateComputerMove();
-        System.out.println("Компьютер выбрал: " + computerMove);
-
         String result = determineWinner(playerMove, computerMove);
-        System.out.println(result); // Просто выводим результат в консоль
+
+        return "Компьютер выбрал: " + computerMove + "\nРезультат: " + result;
     }
+
 
 
     /**

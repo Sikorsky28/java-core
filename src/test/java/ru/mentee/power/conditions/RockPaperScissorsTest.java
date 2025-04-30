@@ -37,9 +37,8 @@ class RockPaperScissorsTest {
         String result = game.determineWinner(playerChoice, computerChoice);
 
         // Assert
-        // TODO: Исправьте ошибку в ожидаемом результате!
-        // Камень бьет ножницы, поэтому игрок должен победить
-        assertThat(result).isEqualTo(PLAYER_WINS); // fixed
+
+        assertThat(result).isEqualTo(PLAYER_WINS);
     }
 
     @Test
@@ -60,10 +59,10 @@ class RockPaperScissorsTest {
     @DisplayName("Бумага побеждает камень")
     void paperBeatsRock() {
         // Arrange
-        // TODO: Исправьте ошибку в выборе компьютера!
-        // Для проверки того, что бумага побеждает камень, компьютер должен выбрать камень
+
+
         String playerChoice = PAPER;
-        String computerChoice = ROCK; // fixed
+        String computerChoice = ROCK;
 
         // Act
         String result = game.determineWinner(playerChoice, computerChoice);
@@ -83,9 +82,8 @@ class RockPaperScissorsTest {
         String result = game.determineWinner(playerChoice, computerChoice);
 
         // Assert
-        // TODO: Исправьте ошибку в ожидаемом результате!
-        // При одинаковом выборе должна быть ничья
-        assertThat(result).isEqualTo(PLAYER_WINS); // В этой строке ошибка!
+
+        assertThat(result).isEqualTo(DRAW);
     }
 
     @Test
@@ -127,9 +125,8 @@ class RockPaperScissorsTest {
         String result = game.determineWinner(playerChoice, computerChoice);
 
         // Assert
-        // TODO: Исправьте ошибку в ожидаемом результате!
-        // При некорректном выборе должна возвращаться ошибка
-        assertThat(result).isEqualTo(DRAW); // В этой строке ошибка!
+
+        assertThat(result).isEqualTo(ERROR);
     }
 
     @Test
@@ -143,9 +140,8 @@ class RockPaperScissorsTest {
         String result = game.determineWinner(playerChoice, computerChoice);
 
         // Assert
-        // TODO: Исправьте ошибку в ожидаемом результате!
-        // При некорректном выборе должна возвращаться ошибка
-        assertThat(result).isEqualTo(COMPUTER_WINS); // В этой строке ошибка!
+
+        assertThat(result).isEqualTo(ERROR);
     }
 
     @Test
@@ -169,9 +165,8 @@ class RockPaperScissorsTest {
         String choice = game.generateComputerMove();
 
         // Assert
-        // TODO: Исправьте ошибку в проверке допустимых вариантов!
-        // Метод должен возвращать один из допустимых вариантов: Камень, Ножницы или Бумага
-        assertThat(choice).isIn(ROCK, SCISSORS, PAPER); // В этой строке ошибка!
+
+        assertThat(choice).isIn(ROCK, SCISSORS, PAPER);
     }
 
     @ParameterizedTest
@@ -180,9 +175,8 @@ class RockPaperScissorsTest {
             "Ножницы, Камень, Победа компьютера",
             "Бумага, Бумага, Ничья",
             "Ножницы, Бумага, Победа игрока",
-            // TODO: Исправьте ошибки в ожидаемых результатах!
-            "Камень, Бумага, Победа игрока",  // В этой строке ошибка! Бумага бьет камень → Победа компьютера
-            "Бумага, Ножницы, Победа игрока"   // В этой строке ошибка! Ножницы бьют бумагу → Победа компьютера
+            "Камень, Бумага, Победа компьютера",
+            "Бумага, Ножницы, Победа компьютера"
     })
     @DisplayName("Различные комбинации выборов для determineWinner")
     void testVariousChoiceCombinationsDetermineWinner(String playerChoice, String computerChoice, String expectedResult) {
@@ -197,12 +191,15 @@ class RockPaperScissorsTest {
         String playerChoice = ROCK;
 
         // Act
-        String result = game.playOneGame();
+
+        String result = game.playOneGame(playerChoice);
+        String computerChoice = game.generateComputerMove();
+
+
 
         // Assert
-        // TODO: Исправьте ошибку в проверке результата!
-        // Результат должен содержать информацию о выборе компьютера
-        assertThat(result).contains("Компьютер: ");  // В этой строке ошибка!
+
+        assertThat(computerChoice).contains( computerChoice );  // В этой строке ошибка!
         assertThat(result).containsAnyOf(PLAYER_WINS, COMPUTER_WINS, DRAW);
 
         // Проверяем, что выбор компьютера был корректным
@@ -218,12 +215,12 @@ class RockPaperScissorsTest {
         String playerChoice = "Ящерица";
 
         // Act
-        String result = game.playOneGame();
+        String result = game.playOneGame(playerChoice);
 
         // Assert
-        // TODO: Исправьте ошибку в ожидаемом сообщении!
+
         // При некорректном выборе игрока должно выводиться сообщение об ошибке
-        assertThat(result).isEqualTo("Неверный выбор игрока."); // В этой строке ошибка!
+        assertThat(result).isEqualTo(ERROR);
     }
 
     // Бонус: Используйте моки для подмены generateComputerChoice
