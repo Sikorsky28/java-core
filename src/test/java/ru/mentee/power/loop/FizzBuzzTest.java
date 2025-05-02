@@ -6,16 +6,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class FizzBuzzTest {
 
     @Test
-    public void testFizzBuzzForFirst15Numbers() {
+    public void testFizzBuzzForFirst30Numbers() {
         // Подготовка
         FizzBuzz fizzBuzz = new FizzBuzz();
 
         // Действие
-        String[] result = fizzBuzz.generateFizzBuzz(15);
+        String[] result = fizzBuzz.generateFizzBuzz(30);
 
         // Проверка
         assertThat(result).isNotNull();
-        assertThat(result).hasSize(15);
+        assertThat(result).hasSize(30);
 
         // Проверяем конкретные значения
         assertThat(result[0]).isEqualTo("1");    // 1
