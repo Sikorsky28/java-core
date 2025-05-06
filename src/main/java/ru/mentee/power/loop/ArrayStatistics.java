@@ -1,6 +1,5 @@
 package ru.mentee.power.loop;
 
-import ru.mentee.power.conditions.CarEcoRating;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -65,8 +64,8 @@ public class ArrayStatistics {
      */
     public int calculateSum() {
         int sum = 0;
-        for (int i = 0; i < data.length; i++) {
-            sum += data[i];
+        for (int datum : data) {
+            sum += datum;
 
         }
 
@@ -86,10 +85,10 @@ public class ArrayStatistics {
 
         int sum = 0;
         double average = 0.0;
-        for (int i = 0; i < data.length; i++) {
-            sum += data[i];
+        for (int datum : data) {
+            sum += datum;
         }
-        average = sum/data.length;
+        average = (double) sum/data.length;
 
 
         return average;
@@ -159,24 +158,25 @@ public class ArrayStatistics {
         double average = 0.0;
         double xSum = 0.0;
 
-        if (data.length == 0 || data.length <= 2){
-            return 0;
+        if (data.length < 2){
+            return 0.0;
         }
 
-        for (int i = 0; i < data.length; i++) {
-            sum += data[i];
+        for (int j : data) {
+            sum += j;
         }
-        average = (double)sum/data.length; // Важно добавить приведение типо
+        average = (double)sum/data.length; // Важно добавить приведение типов
 
-        for (int i = 0; i < data.length; i++) {
-            xSum += Math.pow((data[i] - average), 2);
+        for (int datum : data) {
+            xSum += Math.pow((datum - average), 2);
 
 
         }
 
-        double std = Math.sqrt(xSum / data.length);
+        return Math.round(Math.sqrt(xSum / (data.length - 1)) * 100) / 100.0;
 
-        return std;
+
+
     }
 
     /**
