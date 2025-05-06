@@ -1,17 +1,24 @@
 package ru.mentee.power.loop;
 
+import java.io.InputStream;
 import java.util.Random;
 import java.util.Scanner;
 
 public class NumberGuessingGame {
     private final Random random;
-    private final Scanner scanner = new Scanner(System.in);
+    private Scanner scanner;
+    private int secretNumber;
     private int gamesPlayed = 0;
     private int minAttempts = Integer.MAX_VALUE;
     private int maxAttempts = 0;
     private int totalAttempts = 0;
 
     public NumberGuessingGame() {
+        this(System.in);
+    }
+
+    public NumberGuessingGame(InputStream inputStream) {
+        this.scanner = new Scanner(inputStream);
         this.random = createRandom();
     }
 
@@ -21,29 +28,23 @@ public class NumberGuessingGame {
 
     public void startGame() {
         do {
-            int attempts = playRound();  // Запускаем раунд
+            int attempts = playRound();
             if (attempts > 0) {
-                updateStatistics(attempts);  // Обновляем статистику
+                updateStatistics(attempts);
             }
-            showStatistics();  // Показываем статистику
-        } while (askPlayAgain());  // 🔥 Если "да", игра продолжается
+            showStatistics();
+        } while (askPlayAgain());
     }
 
-
-
     public int playRound() {
-        // Загадываем число от 1 до 100
-        int secretNumber = random.nextInt(100) + 1;
+        secretNumber = random.nextInt(100) + 1;
         int attempts = 0;
         boolean guessed = false;
 
         System.out.println("Я загадал число от 1 до 100. Попробуйте угадать!");
 
-        // Используем do-while, чтобы гарантировать хотя бы одну попытку
         do {
             System.out.print("Введите ваше предположение (или 'q' для выхода): ");
-
-            // Проверяем корректность ввода
 
             if (!scanner.hasNextLine()) {
                 System.out.println("Ошибка: нет доступных данных!");
@@ -52,31 +53,26 @@ public class NumberGuessingGame {
 
             String input = scanner.nextLine();
 
-            // Проверяем, хочет ли пользователь выйти
             if (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit")) {
                 System.out.println("Игра прервана. Загаданное число было: " + secretNumber);
                 return attempts;
             }
 
-            // Пытаемся преобразовать ввод в число
             int guess;
             try {
                 guess = Integer.parseInt(input);
             } catch (NumberFormatException e) {
                 System.out.println("Пожалуйста, введите целое число!");
-                continue; // Пропускаем текущую итерацию
+                continue;
             }
 
-            // Проверяем диапазон
             if (guess < 1 || guess > 100) {
                 System.out.println("Пожалуйста, введите число в диапазоне от 1 до 100!");
                 continue;
             }
 
-            // Увеличиваем счетчик попыток
             attempts++;
 
-            // Проверяем угадал ли пользователь
             if (guess == secretNumber) {
                 System.out.println("Поздравляю! Вы угадали число " + secretNumber +
                         " за " + attempts + " попыток.");
@@ -91,6 +87,7 @@ public class NumberGuessingGame {
 
         return attempts;
     }
+
     private void updateStatistics(int attempts) {
         if (attempts > 0) {
             gamesPlayed++;
@@ -114,7 +111,7 @@ public class NumberGuessingGame {
     private boolean askPlayAgain() {
         System.out.print("Хотите сыграть еще раз? (да/нет): ");
 
-        if (!scanner.hasNextLine()) {  // 🔥 Проверяем, есть ли ввод
+        if (!scanner.hasNextLine()) {
             System.out.println("Ошибка: нет доступных данных!");
             return false;
         }
@@ -122,7 +119,6 @@ public class NumberGuessingGame {
         String answer = scanner.nextLine().trim().toLowerCase();
         return answer.equals("да") || answer.equals("yes") || answer.equals("y");
     }
-
 
     public void close() {
         scanner.close();
