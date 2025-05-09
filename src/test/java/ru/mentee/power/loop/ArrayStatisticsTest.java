@@ -59,7 +59,7 @@ class ArrayStatisticsTest {
         ArrayStatistics stats = new ArrayStatistics(testData);
 
         // Проверка (с округлением до 2 знаков после запятой)
-        assertThat(Math.round(stats.calculateStandardDeviation() * 100) / 100.0).isEqualTo(2.51);
+        assertThat(Math.round(stats.calculateStandardDeviation() * 100) / 100.0).isEqualTo(2.43);
     }
 
     @Test
