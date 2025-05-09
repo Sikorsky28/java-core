@@ -154,30 +154,26 @@ public class ArrayStatistics {
      * @return стандартное отклонение или 0, если массив пуст или содержит менее 2 элементов
      */
     public double calculateStandardDeviation() {
-        int sum = 0;
-        double average = 0.0;
-        double xSum = 0.0;
-
-        if (data.length < 2){
+        if (data.length < 2) {
             return 0.0;
         }
 
-        for (int j : data) {
-            sum += j;
+        double mean = calculateAverage();
+        double sumOfSquaredDifferences = 0.0;
+        System.out.println("Среднее: " + mean);
+
+
+        for (int value : data) {
+            sumOfSquaredDifferences += Math.pow(value - mean, 2);
+            System.out.println(Math.pow(value - mean, 2));
         }
-        average = (double)sum/data.length; // Важно добавить приведение типов
 
-        for (int datum : data) {
-            xSum += Math.pow((datum - average), 2);
+        System.out.println("Сумма квадратов отклонений: " + sumOfSquaredDifferences);
 
-
-        }
-
-        return Math.round(Math.sqrt(xSum / (data.length - 1)) * 100) / 100.0;
-
-
-
+        double variance = sumOfSquaredDifferences / (data.length); // Делим на n, а не (n-1)
+        return Math.sqrt(variance);
     }
+
 
     /**
      * Подсчитывает количество элементов, больших заданного значения
