@@ -47,7 +47,7 @@ public class StringUtils {
             return str;
         }
 
-    return str.substring(0, maxLength - 1) + " ";
+    return str.substring(0, maxLength ) + "...";
     }
 
     /**

@@ -16,10 +16,10 @@ public class StringUtilsTest {
     @Test
     public void testTruncate() {
         assertThat(StringUtils.truncate("hello", 5)).isEqualTo("hello");
-        assertThat(StringUtils.truncate("hello world", 4)).isEqualTo("hel ");
+        assertThat(StringUtils.truncate("hello world", 4)).isEqualTo("hell...");
         assertThat(StringUtils.truncate(null, 10)).isEmpty();
         assertThat(StringUtils.truncate("", 10)).isEmpty();
-        assertThat(StringUtils.truncate("hello world", 5)).isEqualTo("hell ");
+        assertThat(StringUtils.truncate("hello world", 5)).isEqualTo("hello...");
     }
 
     @Test
