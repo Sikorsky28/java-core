@@ -73,4 +73,12 @@ public class DataFormatterTest {
         List<String> empty = Arrays.asList();
         assertEquals("", DataFormatter.format(empty, ";"));
     }
+
+    @Test
+    public void testFormatWithNull() {
+        // Передаём null в метод format и проверяем, что результат — пустая строка
+        // idea подсвечивает null, видимо потому что тест ожидает конкретные параметры, так что пришлось создать эту переменную.
+        List<String> nullList = null;
+        assertEquals("", DataFormatter.format(nullList));
+    }
 }
