@@ -105,8 +105,9 @@ public class DataFormatter {
      * @return Объединенная строка
      */
     public static String format(List<String> items) {
-
-
+        if (items == null || items.isEmpty()) {
+            return ""; // Возвращаем пустую строку вместо ошибки
+        }
         return String.join(", ", items);
     }
 
