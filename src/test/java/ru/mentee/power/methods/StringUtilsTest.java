@@ -1,6 +1,8 @@
 package ru.mentee.power.methods;
 
 import org.junit.jupiter.api.Test;
+import ru.mentee.power.variables.StringUtils;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class StringUtilsTest {
