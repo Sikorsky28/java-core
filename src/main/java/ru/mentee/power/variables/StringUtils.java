@@ -1,4 +1,4 @@
-package ru.mentee.power.methods;
+package ru.mentee.power.variables;
 
 /**
  * Утилитарный класс для работы со строками.

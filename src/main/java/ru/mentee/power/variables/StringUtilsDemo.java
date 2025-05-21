@@ -1,4 +1,4 @@
-package ru.mentee.power.methods;
+package ru.mentee.power.variables;
 
 public class StringUtilsDemo {
     public static void main(String[] args) {
