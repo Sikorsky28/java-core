@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Класс для управления задачами
@@ -186,11 +187,12 @@ public class TaskManager {
      * Использует алгоритм сортировки вставками из блока циклов
      */
     public List<Task> sortTasksByPriority() {
-        List<Task> sortedTasksByPriority = new ArrayList<>(getAllTasks());
-        sortedTasksByPriority.sort(Comparator.comparing(Task::getPriority));
-
-        return sortedTasksByPriority;
+        return tasks.stream()
+                .sorted(Comparator.comparing(Task::getPriority)
+                        .thenComparing(task -> task.getDueDate().getTime())) // Сравниваем по числовому значению времени
+                .collect(Collectors.toList());
     }
+
 
     /**
      * Вывод всех задач в консоль
