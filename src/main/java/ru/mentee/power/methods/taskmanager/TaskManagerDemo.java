@@ -39,5 +39,8 @@ public class TaskManagerDemo {
         // Вывод всех задач после изменений
         System.out.println("\n🔹 Обновлённый список задач:");
         taskManager.printAllTasks();
+        
+        
     }
+
 }
