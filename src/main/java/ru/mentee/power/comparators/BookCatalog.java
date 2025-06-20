@@ -73,7 +73,10 @@ public class BookCatalog {
      * @return компаратор для сортировки по названию (по алфавиту)
      */
     public static Comparator<Book> byTitle() {
-        return Comparator.comparing(Book::getTitle, String.CASE_INSENSITIVE_ORDER);
+        return Comparator.comparing(
+                Book::getTitle,
+                Comparator.nullsLast(String.CASE_INSENSITIVE_ORDER)
+        );
     }
 
     /**
@@ -81,7 +84,10 @@ public class BookCatalog {
      */
     public static Comparator<Book> byAuthor() {
 
-        return Comparator.comparing(Book::getAuthor, String.CASE_INSENSITIVE_ORDER);
+        return Comparator.comparing(
+                Book::getAuthor,
+                Comparator.nullsLast(String.CASE_INSENSITIVE_ORDER)
+        );
     }
 
     /**
