@@ -16,26 +16,21 @@ public class LinkedListAnalyzer {
      * @throws IllegalArgumentException если list1 или list2 равны null
      */
     public static <T> List<T> mergeLists(List<T> list1, List<T> list2) {
-        // Неоптимизированная реализация (для демонстрации):
+        if (list1 == null || list2 == null) {
+            throw new IllegalArgumentException("Оба списка должны быть не null");
+        }
+
         Set<T> uniqueElements = new HashSet<>();
 
-        // Проходим по list1 и добавляем в set
-        for (int i = 0; i < list1.size(); i++) {
-            uniqueElements.add(list1.get(i)); // Вызов get(i) - неоптимально для LinkedList!
+        for (T item : list1) {
+            uniqueElements.add(item);
         }
 
-        // Проходим по list2 и добавляем в set
-        for (int i = 0; i < list2.size(); i++) {
-            uniqueElements.add(list2.get(i)); // Вызов get(i) - неоптимально для LinkedList!
+        for (T item : list2) {
+            uniqueElements.add(item);
         }
 
-        // Преобразуем set в список
-        return new ArrayList<>(uniqueElements);
-
-        // Оптимизированная реализация должна:
-        // 1. Использовать итераторы для обхода списков
-        // 2. Возвращать LinkedList для эффективных вставок
-        // 3. Не использовать get(index)
+        return new LinkedList<>(uniqueElements);
     }
 
     /**
