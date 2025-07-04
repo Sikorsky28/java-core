@@ -1,7 +1,6 @@
 package ru.mentee.power.collections.library;
 
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -85,7 +84,9 @@ public class Book {
 
 
     public void addAuthor(String author) {
-        if(author != null || !author.isBlank())
+        if(author == null || author.isBlank()){
+            throw new IllegalArgumentException("Author cannot be null or blank");
+        }
             authors.add(author.trim());
     }
 
