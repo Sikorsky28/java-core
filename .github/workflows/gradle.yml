@@ -32,7 +32,7 @@ jobs:  # Задачи, которые будут выполняться
                with:
                  name: jacoco-report-${{ github.run_id }} # Имя артефакта (с ID сборки)
                  path: build/reports/jacoco/test/html # Путь к отчету
-                 retention-days: 7
+                 retention-days: 8
 
       - name: Clean and build  # Очистка и полная сборка проекта
         run: ./gradlew clean build
