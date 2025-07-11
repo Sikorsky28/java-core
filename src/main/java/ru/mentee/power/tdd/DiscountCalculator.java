@@ -18,9 +18,9 @@ public class DiscountCalculator {
     public double calculateDiscountedPrice(double amount) {
         double discountRate = 0.0;
 
-        if (amount > 5000) {
+        if (amount > 5000) {         // Сначала проверяем > 5000
             discountRate = 0.20; // 20%
-        } else if (amount < 5000 && amount > 1000) {
+        } else if (amount > 1000) { // Потом > 1000
             discountRate = 0.10; // 10%
         }
 
