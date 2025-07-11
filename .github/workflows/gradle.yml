@@ -27,6 +27,12 @@ jobs:  # Задачи, которые будут выполняться
 
       - name: Run tests  # Запуск тестов
         run: ./gradlew test
+               - name: Upload JaCoCo coverage report
+               uses: actions/upload-artifact@v4 # Используем последнюю версию
+               with:
+                 name: jacoco-report-${{ github.run_id }} # Имя артефакта (с ID сборки)
+                 path: build/reports/jacoco/test/html # Путь к отчету
+                 retention-days: 7
 
       - name: Clean and build  # Очистка и полная сборка проекта
         run: ./gradlew clean build
