@@ -87,7 +87,7 @@ class AdvancedCalculatorTest {
         // Arrange
         List<Integer> numbers = new ArrayList<>(); // Нужен изменяемый список
         numbers.add(10);
-        numbers.add(null); // Добавляем null
+        numbers.add(null);
         numbers.add(20);
         int expectedSum = 30; // Ожидаем, что null будет проигнорирован
 
