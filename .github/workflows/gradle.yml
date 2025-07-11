@@ -1,38 +1,40 @@
-name: Java CI with Gradle  # Название вашего workflow
+name: Java CI with Gradle
 
-on:  # Определяет, когда будет запускаться workflow
+on:
   push:
-    branches: [ main, feature/* ]  # При push в ветку main или любую feature-ветку
+    branches: [ main, 'feature/*' ]
   pull_request:
-    branches: [ main ]  # При создании PR в main
+    branches: [ main ]
 
-jobs:  # Задачи, которые будут выполняться
-  build:  # Название задачи
-    runs-on: ubuntu-latest  # На какой ОС будет выполняться (исправил alpine на ubuntu)
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-    steps:  # Шаги выполнения
-      - uses: actions/checkout@v3  # Клонирование репозитория
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      - name: Set up JDK 21  # Установка Java 21
+      - name: Set up JDK 21
         uses: actions/setup-java@v3
         with:
           java-version: '21'
           distribution: 'temurin'
 
-      - name: Prepare  # Подготовка Предоставление прав на выполнение
-        run: chmod +x gradlew
+      - name: Make Gradle wrapper executable
+        run: chmod +x ./gradlew
 
-      - name: Build without tests  # Сборка проекта без тестов
+      - name: Build project (without tests)
         run: ./gradlew clean build -x test
 
-      - name: Run tests  # Запуск тестов
+      - name: Run tests
         run: ./gradlew test
-               - name: Upload JaCoCo coverage report
-               uses: actions/upload-artifact@v4 # Используем последнюю версию
-               with:
-                 name: jacoco-report-${{ github.run_id }} # Имя артефакта (с ID сборки)
-                 path: build/reports/jacoco/test/html # Путь к отчету
-                 retention-days: 8
 
-      - name: Clean and build  # Очистка и полная сборка проекта
+      - name: Upload JaCoCo coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-report-${{ github.run_id }}
+          path: build/reports/jacoco/test/html
+          retention-days: 7
+
+      - name: Full clean and build (optional)
         run: ./gradlew clean build
