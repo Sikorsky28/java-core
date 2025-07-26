@@ -8,7 +8,7 @@ public class DirectoryViewer {
     // 1. Проверить наличие аргумента командной строки
     if (args.length == 0) {
       System.err.println("Ошибка: Не указан путь к директории.");
-      System.err.println("Использование: java ru.mentee.power.io.DirectoryViewer <путь_к_директории>");
+      System.err.println("Использование: java ru.mentee.power.io.DirectoryViewer <C:\\Users\\Proger\\IdeaProjects\n>");
       return; // Завершить программу
     }
 

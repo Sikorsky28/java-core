@@ -119,7 +119,6 @@ class DirectoryViewerTest {
     // Given: Пустой массив аргументов
     String[] args = {};
 
-    // When: Запускаем main метод
     DirectoryViewer.main(args);
 
     // Then: Проверяем вывод ошибок
