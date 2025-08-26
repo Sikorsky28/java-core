@@ -53,7 +53,7 @@ class PerformanceComparisonCorrectnessTest {
   }
 
   @Test
-  @DisplayName("createLargeBinaryFile должен создавать файл ,нужного размера")
+  @DisplayName("createLargeBinaryFile должен создавать файл нужного размера")
   void createLargeBinaryFileShouldCreateFileOfCorrectSize() throws IOException {
     Path largeFile = tempDir.resolve("test_large.bin");
     long expectedSize = 1024 * 10; // 10 KB для теста

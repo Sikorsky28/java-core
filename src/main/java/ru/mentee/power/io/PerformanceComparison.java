@@ -43,7 +43,7 @@ public class PerformanceComparison {
       long mismatchBuffered = Files.mismatch(sourcePath, bufferedPath);
       long mismatchUnbuffered = Files.mismatch(sourcePath, unbufferedPath);
 
-      System.out.println("Буферизованная копия, совпадает: " + (mismatchBuffered == -1L));
+      System.out.println("Буферизованная копия совпадает: " + (mismatchBuffered == -1L));
       System.out.println("Небуферизованная копия совпадает: " + (mismatchUnbuffered == -1L));
 
     } catch (IOException e) {

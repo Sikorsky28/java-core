@@ -49,7 +49,7 @@ class LineProcessorTest {
   }
 
   @Test
-  @DisplayName("Должен корректно обработать файл с несколькими строками, разного регистра")
+  @DisplayName("Должен корректно обработать файл с несколькими строками разного регистра")
   void shouldProcessFileWithMixedCaseLines() throws Exception {
     // Подготовка входных данных
     List<String> inputLines = List.of(
