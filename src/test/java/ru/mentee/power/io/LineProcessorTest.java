@@ -12,6 +12,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -47,6 +48,13 @@ class LineProcessorTest {
     LineProcessor.main(new String[]{input.toString(), output.toString()});
   }
 
+  private List<String> readNormalized(Path path) throws Exception {
+    return Files.readAllLines(path, StandardCharsets.UTF_8)
+        .stream()
+        .map(s -> s.replace("\r", "")) // нормализуем переносы строк
+        .collect(Collectors.toList());
+  }
+
   @Test
   @DisplayName("Должен корректно обработать файл с несколькими строками разного регистра")
   void shouldProcessFileWithMixedCaseLines() throws Exception {
@@ -67,11 +75,7 @@ class LineProcessorTest {
         "MIXED CASE LINE"
     );
 
-    List<String> actualOutput = Files.readAllLines(outputFile, StandardCharsets.UTF_8);
-    // нормализуем переносы строк
-    for (int i = 0; i < actualOutput.size(); i++) {
-      actualOutput.set(i, actualOutput.get(i).replace("\r", ""));
-    }
+    List<String> actualOutput = readNormalized(outputFile);
 
     assertThat(actualOutput).isEqualTo(expectedOutput);
     assertThat(errContent.toString(StandardCharsets.UTF_8)).isBlank();
@@ -84,7 +88,7 @@ class LineProcessorTest {
 
     runLineProcessor(inputFile, outputFile);
 
-    List<String> actualOutput = Files.readAllLines(outputFile, StandardCharsets.UTF_8);
+    List<String> actualOutput = readNormalized(outputFile);
     assertThat(actualOutput).isEmpty();
     assertThat(errContent.toString(StandardCharsets.UTF_8)).isBlank();
   }
@@ -97,8 +101,7 @@ class LineProcessorTest {
 
     runLineProcessor(inputFile, outputFile);
 
-    List<String> actualOutput = Files.readAllLines(outputFile, StandardCharsets.UTF_8);
-    for (int i = 0; i < actualOutput.size(); i++) actualOutput.set(i, actualOutput.get(i).replace("\r", ""));
+    List<String> actualOutput = readNormalized(outputFile);
     assertThat(actualOutput).containsExactly("ABC");
     assertThat(errContent.toString(StandardCharsets.UTF_8)).isBlank();
   }
@@ -113,7 +116,8 @@ class LineProcessorTest {
 
     assertThat(Files.exists(defaultInput)).isTrue();
     assertThat(Files.exists(defaultOutput)).isTrue();
-    assertThat(outContent.toString(StandardCharsets.UTF_8))
-        .contains("не найден, создан файл по умолчанию");
+
+    String normalizedOut = outContent.toString(StandardCharsets.UTF_8).replace("\r", "");
+    assertThat(normalizedOut).contains("не найден").contains("создан файл по умолчанию");
   }
 }

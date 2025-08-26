@@ -13,7 +13,7 @@ import java.util.Locale;
 public class LineProcessor {
 
   public static void main(String[] args) {
-    // Берём аргументы или дефолтные пути
+    // Используем аргументы или дефолтные имена файлов
     String inputFileName = args.length > 0 ? args[0] : "input_for_processor.txt";
     String outputFileName = args.length > 1 ? args[1] : "output_processed.txt";
 
@@ -28,7 +28,7 @@ public class LineProcessor {
             "третья"
         );
         Files.write(inputPath, defaultLines, StandardCharsets.UTF_8);
-        System.out.println("Файл не найден создан файл по умолчанию: " + inputFileName);
+        System.out.println("Файл не найден, создан файл по умолчанию: " + inputPath.getFileName());
       }
     } catch (IOException e) {
       System.err.println("Ошибка при создании файла по умолчанию: " + e.getMessage());
@@ -40,11 +40,11 @@ public class LineProcessor {
 
       String line;
       while ((line = reader.readLine()) != null) {
-        writer.write(line.toUpperCase(Locale.ROOT)); // фиксируем локаль
+        writer.write(line.toUpperCase(Locale.ROOT)); // фиксируем локаль для русских букв
         writer.newLine();
       }
 
-      System.out.println("Файл успешно обработан. Результат в " + outputFileName);
+      System.out.println("Файл успешно обработан. Результат в " + outputPath.getFileName());
 
     } catch (IOException e) {
       System.err.println("Ошибка при обработке файла: " + e.getMessage());
