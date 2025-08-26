@@ -25,7 +25,7 @@ public class LineProcessor {
             "третья"
         );
         Files.write(inputPath, defaultLines, StandardCharsets.UTF_8);
-        System.out.println("Файл не найден, создан файл по умолчанию: " + inputFileName);
+        System.out.println("Создан файл по умолчанию: " + inputFileName);
       }
     } catch (IOException e) {
       System.err.println("Ошибка при создании файла по умолчанию: " + e.getMessage());
