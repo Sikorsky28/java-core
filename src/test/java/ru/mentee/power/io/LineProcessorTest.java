@@ -43,15 +43,13 @@ class LineProcessorTest {
     System.setErr(originalErr);
   }
 
-  // Вспомогательный метод: вызывает LineProcessor.main с конкретными файлами
   private void runLineProcessor(Path input, Path output) {
     LineProcessor.main(new String[]{input.toString(), output.toString()});
   }
 
   @Test
-  @DisplayName("Должен корректно обработать файл с несколькими строками, разного регистра")
+  @DisplayName("Должен корректно обработать файл с несколькими строками разного регистра")
   void shouldProcessFileWithMixedCaseLines() throws Exception {
-    // Подготовка входных данных
     List<String> inputLines = List.of(
         "Hello World",
         "строка Смешанного РегиСТРа",
@@ -60,10 +58,8 @@ class LineProcessorTest {
     );
     Files.write(inputFile, inputLines, StandardCharsets.UTF_8);
 
-    // Запуск основной логики
     runLineProcessor(inputFile, outputFile);
 
-    // Ожидаемый результат
     List<String> expectedOutput = List.of(
         "HELLO WORLD",
         "СТРОКА СМЕШАННОГО РЕГИСТРА",
@@ -71,46 +67,39 @@ class LineProcessorTest {
         "MIXED CASE LINE"
     );
 
-    // Проверка результата
     List<String> actualOutput = Files.readAllLines(outputFile, StandardCharsets.UTF_8);
-    assertThat(actualOutput).isEqualTo(expectedOutput);
+    // нормализуем переносы строк
+    for (int i = 0; i < actualOutput.size(); i++) {
+      actualOutput.set(i, actualOutput.get(i).replace("\r", ""));
+    }
 
-    // Проверка, что ошибок не было
+    assertThat(actualOutput).isEqualTo(expectedOutput);
     assertThat(errContent.toString(StandardCharsets.UTF_8)).isBlank();
   }
 
   @Test
   @DisplayName("Должен корректно обработать пустой входной файл")
   void shouldProcessEmptyInputFile() throws Exception {
-    // Создаем пустой файл
     Files.write(inputFile, List.of(), StandardCharsets.UTF_8);
 
     runLineProcessor(inputFile, outputFile);
 
-    // Проверка: выходной файл тоже пуст
     List<String> actualOutput = Files.readAllLines(outputFile, StandardCharsets.UTF_8);
     assertThat(actualOutput).isEmpty();
-
-    // Ошибок не должно быть
     assertThat(errContent.toString(StandardCharsets.UTF_8)).isBlank();
   }
 
   @Test
   @DisplayName("Должен перезаписать существующий выходной файл")
   void shouldOverwriteExistingOutputFile() throws Exception {
-    // Входной файл
     Files.write(inputFile, List.of("abc"), StandardCharsets.UTF_8);
-
-    // Выходной файл уже существует с другим содержимым
     Files.write(outputFile, List.of("OLD DATA"), StandardCharsets.UTF_8);
 
     runLineProcessor(inputFile, outputFile);
 
-    // Проверка: старое содержимое перезаписано
     List<String> actualOutput = Files.readAllLines(outputFile, StandardCharsets.UTF_8);
+    for (int i = 0; i < actualOutput.size(); i++) actualOutput.set(i, actualOutput.get(i).replace("\r", ""));
     assertThat(actualOutput).containsExactly("ABC");
-
-    // Ошибок не должно быть
     assertThat(errContent.toString(StandardCharsets.UTF_8)).isBlank();
   }
 
@@ -120,16 +109,10 @@ class LineProcessorTest {
     Path defaultInput = tempDir.resolve("input_for_processor.txt");
     Path defaultOutput = tempDir.resolve("output_processed.txt");
 
-    // Запуск без предварительного создания input-файла
     LineProcessor.main(new String[]{defaultInput.toString(), defaultOutput.toString()});
 
-    // Проверяем, что input-файл создан
     assertThat(Files.exists(defaultInput)).isTrue();
-
-    // Проверяем, что output-файл тоже создан
     assertThat(Files.exists(defaultOutput)).isTrue();
-
-    // Проверяем, что в System.out есть сообщение
     assertThat(outContent.toString(StandardCharsets.UTF_8))
         .contains("не найден, создан файл по умолчанию");
   }

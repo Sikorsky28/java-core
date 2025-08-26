@@ -1,16 +1,19 @@
 package ru.mentee.power.io;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Locale;
 
 public class LineProcessor {
 
   public static void main(String[] args) {
-    // Используем аргументы, если они есть
+    // Берём аргументы или дефолтные пути
     String inputFileName = args.length > 0 ? args[0] : "input_for_processor.txt";
     String outputFileName = args.length > 1 ? args[1] : "output_processed.txt";
 
@@ -37,7 +40,7 @@ public class LineProcessor {
 
       String line;
       while ((line = reader.readLine()) != null) {
-        writer.write(line.toUpperCase());
+        writer.write(line.toUpperCase(Locale.ROOT)); // фиксируем локаль
         writer.newLine();
       }
 
